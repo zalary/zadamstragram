@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # add devise for login
 gem 'devise'
 
+#use pretty haml and not ugly erb
+gem 'haml'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 

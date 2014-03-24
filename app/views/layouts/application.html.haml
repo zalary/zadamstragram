@@ -1,0 +1,23 @@
+%html
+  %head
+    %meta{ :charset => "utf-8" }
+    -# Set the viewport width to device width for mobile
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
+    %title Zadamstagram
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "vendor/custom.modernizr"
+    = csrf_meta_tags
+    %body
+      .row
+        .large-12.columns
+          - if flash.present?
+            - flash.each do |name, msg|
+              = content_tag :div, msg, class: name
+
+          = yield
+
+          = javascript_include_tag "application"
+      
+          = yield
+
+          = javascript_include_tag "application"
