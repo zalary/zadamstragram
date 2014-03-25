@@ -19,16 +19,7 @@ describe Post do
     end
   end
 
-  pending context "comments" do
-    it "has one comment" do
 
-    end
-
-    it "has more than one comment" do
-
-    end
-
-  end
 
   pending context "likes" do
     it "has one like" do
