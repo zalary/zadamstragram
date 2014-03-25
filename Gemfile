@@ -7,6 +7,7 @@ gem 'omniauth-facebook'
 
 #use pretty haml and not ugly erb
 gem 'haml'
+gem 'foundation-rails'
 
 #enviroment variables
 gem 'figaro'
