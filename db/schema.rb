@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324220701) do
+ActiveRecord::Schema.define(version: 20140325202237) do
+
+  create_table "posts", force: true do |t|
+    t.string   "pic_url"
+    t.integer  "users_id"
+    t.integer  "comments_id"
+    t.integer  "likes_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["comments_id"], name: "index_posts_on_comments_id"
+  add_index "posts", ["likes_id"], name: "index_posts_on_likes_id"
+  add_index "posts", ["users_id"], name: "index_posts_on_users_id"
+
+  create_table "relationships", force: true do |t|
+    t.integer  "follower_id"
+    t.integer  "following_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

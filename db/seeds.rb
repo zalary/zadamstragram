@@ -14,5 +14,9 @@ zal.save!
 adam =  User.new({:name => "Adam", :email => "adamshukur@gmail.com", :password => "123456adam", :password_confirmation => "123456adam"})
   
 adam.skip_confirmation!
+<<<<<<< HEAD
 adam.save!
    
+=======
+adam.save!
+>>>>>>> 551f04299930b21066e91e94b613a4d61cef7920
