@@ -2,9 +2,14 @@ source 'https://rubygems.org'
 
 # add devise for login
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 #use pretty haml and not ugly erb
 gem 'haml'
+
+#enviroment variables
+gem 'figaro'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
