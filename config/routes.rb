@@ -7,10 +7,13 @@ Zadamstagram::Application.routes.draw do
   # root 'welcome#index'
   resources :users do
     resources :posts
+    resources :comments
+    resources :likes
   end
 
   resources :posts do
     resources :comments
+    resources :likes
   end
 
 
