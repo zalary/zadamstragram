@@ -5,6 +5,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+# rspec for testing
+gem 'rspec-rails'
+
 #use pretty haml and not ugly erb
 gem 'haml'
 
