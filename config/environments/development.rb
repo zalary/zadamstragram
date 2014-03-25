@@ -35,6 +35,6 @@ Zadamstagram::Application.configure do
     :password => ENV['MANDRILL_APIKEY']
   }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_delivies = true
+  config.action_mailer.perform_deliveries = true
 
 end

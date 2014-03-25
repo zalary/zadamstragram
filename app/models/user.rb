@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+<<<<<<< HEAD
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :relationships, foreign_key: "follower_id"
@@ -15,4 +16,9 @@ class User < ActiveRecord::Base
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationships"
   has_many :followers, through: :reverse_relationships, source: :follower
 
+=======
+  devise :database_authenticatable, :registerable, 
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable, :omniauthable
+>>>>>>> zal_dev
 end
