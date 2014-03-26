@@ -10,18 +10,11 @@ describe Like do
     end
 
     it "should have a user_id and a photo_id" do
-      expect(@p.like.user_id).to eq([1])
-      expect(@p.like.photo_id).to eq(@pid)
+      expect(@p.likes.first.user_id).not_to be_nil
+      expect(@p.likes.first.post_id).not_to be_nil
       #expect(@c.text).to eq
     end
 
 
-   pending it "has more than one comment" do
-
-      @c2 = Comment.create(text: "Totally Awesome", post_id: @pid)
-
-      expect(@p.comments).to eq([@c,@c2])
-      expect(@p.comments[1].text).to eq("Totally Awesome")
-    end
   end
 end

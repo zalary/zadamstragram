@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-        :confirmable, :omniauthable
+         :confirmable, :omniauthable
 
-  has_many :relationships, foreign_key: "follower_id"
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
 
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationships"
@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :likes
 
   def following?(other_user)
-    relationships.find_by(followed_id: other_user.id)
+    relationships.find_by(followed_id: other_user.id) ? true : false
   end
 
   def follow!(other_user)
