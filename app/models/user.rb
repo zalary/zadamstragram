@@ -26,5 +26,35 @@ class User < ActiveRecord::Base
     relationships.find_by(followed_id: other_user.id).destroy
   end
 
+  def followed_post_by_date
+    # followed_users
+    followed_users.includes(:posts)
+    #.order(:created_at)
+  end
 
+  def show_followed
+    images = []
+    followed_users.each do |f|
+      p = Post.find_by(user_id: f.id)
+      images << p.pic_url
+    end
+
+    comments = []
+    followed_users.each do |f|
+      c = Post.find_by(user_id: f.id).comment_id
+      c.each do |comment|
+        comments << [comment.user_id, comment.text]
+      end
+    end
+
+    likes = []
+    followed_users.each do |f|
+      l = Post.find_by(user_id: f.id).like_id
+      l.each do |like|
+        likes << like.user_id
+      end
+    end
+
+    return images, comments, likes
+  end
 end

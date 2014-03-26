@@ -1,0 +1,9 @@
+<% provide(:title, 'Feed') %>
+<%= @current_user %>
+<h1><%#= @user.name %>'s Main Zadamstagram Feed: </h1>
+
+<% user = User.first %>
+<% @posts.followed_posts_by_user(user).each do |post| %>
+  <%= post.id %>
+  <%= image_tag(post.pic_url, class:'feed-pic') %>
+<% end %>

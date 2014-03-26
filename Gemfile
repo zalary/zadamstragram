@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'hirb'
 
 # rspec for testing
 gem 'rspec-rails'

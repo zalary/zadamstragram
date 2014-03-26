@@ -16,3 +16,19 @@ adam =  User.new({:name => "Adam", :email => "adamshukur@gmail.com", :password =
 adam.skip_confirmation!
 adam.save!
 
+todd =  User.new({:name => "Todd", :email => "todd@themakersquare.com", :password => "whydicutmyhair?!", :password_confirmation => "whydicutmyhair?!"})
+todd.skip_confirmation!
+todd.save!
+
+Post.create(pic_url: "http://i.imgur.com/nRqnkp5.jpg", user_id: 2)
+Post.create(pic_url: "http://i.imgur.com/RepqfUE.jpg", user_id: 3)
+
+
+Post.create(pic_url: "http://i.imgur.com/xmzFf4Z.jpg", user_id: 3)
+Post.create(pic_url: "http://i.imgur.com/HlC79vG.jpg", user_id: 2)
+
+Post.create(pic_url: "http://i.imgur.com/ExktfIb.jpg", user_id: 1)
+Post.create(pic_url: "http://i.imgur.com/WLJZMbj.jpg", user_id: 1)
+
+zal.follow!(adam)
+zal.follow!(todd)
