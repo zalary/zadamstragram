@@ -11,20 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325202237) do
+ActiveRecord::Schema.define(version: 20140325215315) do
 
-  create_table "posts", force: true do |t|
-    t.string   "pic_url"
-    t.integer  "users_id"
-    t.integer  "comments_id"
-    t.integer  "likes_id"
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "posts", ["comments_id"], name: "index_posts_on_comments_id"
-  add_index "posts", ["likes_id"], name: "index_posts_on_likes_id"
-  add_index "posts", ["users_id"], name: "index_posts_on_users_id"
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["post_id"], name: "index_likes_on_post_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
+
+  create_table "posts", force: true do |t|
+    t.string   "pic_url"
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.integer  "like_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["comment_id"], name: "index_posts_on_comment_id"
+  add_index "posts", ["like_id"], name: "index_posts_on_like_id"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"

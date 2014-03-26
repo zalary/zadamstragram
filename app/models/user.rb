@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :followers, through: :reverse_relationships, source: :follower
 
   has_many :posts
+  has_many :likes
 
   def following?(other_user)
     relationships.find_by(followed_id: other_user.id)
