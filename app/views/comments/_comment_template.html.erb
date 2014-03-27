@@ -9,8 +9,11 @@
 </div>
 
 <script type="text/javascript">
-$('#comment-button').on('click', function(e){
+$('#comment-button', this).on('click', function(e){
   e.preventDefault();
+  var user_id = "1";
+  var post_id = "2";
+  alert(post_id);
     $.ajax("/comments",{
       dataType: 'json',
       contentType: 'application/json',
@@ -18,9 +21,10 @@ $('#comment-button').on('click', function(e){
       data: JSON.stringify( {
        // authenticity_token: auth_token,
         comment: {
-          text: $('comment_text').val() ,
-          post_id: <%= @post.id %>,
-          user_id: '1'
+          post_id: "1" ,
+          user_id: "1",
+          text: $('#comment_text').val()
+
         }
               }),
       success: function(data){console.log("success here");},
