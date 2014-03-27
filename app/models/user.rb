@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
   def followed_post_by_date
     # followed_users
-    followed_users.includes(:posts)
+    followed_users.joins(:posts).includes(:posts)
     #.order(:created_at)
   end
 
