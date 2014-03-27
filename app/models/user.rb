@@ -26,10 +26,15 @@ class User < ActiveRecord::Base
     relationships.find_by(followed_id: other_user.id).destroy
   end
 
-  def followed_post_by_date
+  def followed_posts_by_date
     # followed_users
-    followed_users.joins(:posts).includes(:posts)
+    # followed_users.includes(:posts)
     #.order(:created_at)
+    followed_ids = self.relationships.where(follower_id: self.id).map(&:followed_id)
+
+    Post.where(user_id: followed_ids).order(created_at: :desc)
+
+
   end
 
   def show_followed

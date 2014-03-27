@@ -1,0 +1,6 @@
+<% @user.followed_posts_by_date.each do |post| %>
+    User Id: <%= post.user_id %>, Post Id: <%= post.id %>
+ <%= image_tag(post.pic_url, class: "feed-pic") %>
+<%= render ('/comments/comment_template') %>
+
+<% end %>

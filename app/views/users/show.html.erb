@@ -2,17 +2,6 @@
 
 <h1><%= @user.name %>'s Main Zadamstagram Feed: </h1>
 
-<%# @user.show_followed.each do |pics| %>
-  <%#= image_tag(pics) %>
-<%# end %>
+<%= render ('/posts/post_template') %>
 
-<%= @user.followed_post_by_date.inspect %>
 
-<% @user.followed_post_by_date.each do |user| %>
-
-  <% user.posts.each do |post| %>
-    <%= user.name %>
-    <%= post.id %>
-    <%= image_tag(post.pic_url, class:'feed-pic') %>
-  <% end %>
-<% end %>

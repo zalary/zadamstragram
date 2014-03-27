@@ -19,6 +19,8 @@ Zadamstagram::Application.routes.draw do
     resources :likes
   end
 
+  resources :comments
+
   # get 'users/:id' => 'users#show', as: 'user'
 
   # Example of regular route:

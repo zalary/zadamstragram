@@ -1,0 +1,30 @@
+<%= form_for(@comment) do |f| %>
+<div class="row">
+    <%= f.label :text, "Add a comment:" %><br>
+    <%= f.text_field :text %><br>
+</div>
+<div class="row actions">
+  <%= f.submit :id=> 'comment-button' %>
+<% end %>
+</div>
+
+<script type="text/javascript">
+$('#comment-button').on('click', function(e){
+  e.preventDefault();
+    $.ajax("/comments",{
+      dataType: 'json',
+      contentType: 'application/json',
+      type: 'POST',
+      data: JSON.stringify( {
+       // authenticity_token: auth_token,
+        comment: {
+          text: $('comment_text').val() ,
+          post_id: <%= @post.id %>,
+          user_id: '1'
+        }
+              }),
+      success: function(data){console.log("success here");},
+      error: function(data){console.log("error here"); console.log(data);}
+    });
+  });
+</script>
