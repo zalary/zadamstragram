@@ -2,17 +2,11 @@
 
 <h1><%= @user.name %>'s Main Zadamstagram Feed: </h1>
 
-<%# @user.show_followed.each do |pics| %>
-  <%#= image_tag(pics) %>
-<%# end %>
 
-<%= @user.followed_post_by_date.post.inspect %>
 
-<% @user.followed_post_by_date.each do |user| %>
+<%#= @user.followed_posts_by_date.inspect %>
 
-  <% user.posts.each do |post| %>
-    <%= user.name %>
-    <%= post.id %>
-    <%= image_tag(post.pic_url, class:'feed-pic') %>
-  <% end %>
+<% @user.followed_posts_by_date.each do |post| %>
+    User Id: <%= post.user_id %>, Post Id: <%= post.id %>
+ <%= image_tag(post.pic_url, class: "feed-pic") %>
 <% end %>
