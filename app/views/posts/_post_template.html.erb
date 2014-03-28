@@ -1,41 +1,56 @@
-<% @user.followed_posts_by_date.each do |post| %>
-  User Id: <span class="user_id"><%= post.user_id %></span>,
-  Post Id: <span class="post_id"><%= post.id %></span>
-  <%= image_tag(post.pic_url, class: "feed-pic") %>
-
-  <!-- Our comment form -->
-  <!-- make sure that @comment is defined -->
-  <%= form_for [post, @comment], remote: true, html: {class: ""} do |f| %>
-    <div class="row">
-      <%= f.label :text, "Add a comment:" %><br>
-      <%= f.text_field :text %><br>
-      <%= f.hidden_field(:post_id, value: post.id) %>
-      <%= f.hidden_field(:user_id, value: @user.id) %>
-    </div>
-    <div class="row actions">
-    <%= f.submit :id=> 'comment-button' %>
-    </div>
+<div class="post_template">
+  <% @user.followed_posts_by_date.each do |post| %>
+    User Id: <span class="user_id"><%= post.user_id %></span>,
+    Post Id: <span class="post_id"><%= post.id %></span>
+    <%= image_tag(post.pic_url, class: "feed-pic") %>
+    <span id="commentlist"></span>
+    <!-- print out existing commments -->
+    <% recent_comments = post.comments.last(5) %>
+    <% recent_comments.each do |comment| %>
+      <ul class="comments-wrap" data-postid="<%= post.id %>">
+        <li><%= comment.user_id %> : <%= comment.text %></li>
+      </ul>
+    <% end %>
+    <!-- Our comment form -->
+    <!-- make sure that @comment is defined -->
+    <%= form_for [post, @comment], remote: true, html: {class: ""} do |f| %>
+      <div class="row">
+        <%= f.label :text, "Add a comment:" %><br>
+        <%= f.text_field :text %><br>
+        <%= f.hidden_field(:post_id, value: post.id) %>
+        <%= f.hidden_field(:user_id, value: @user.id) %>
+      </div>
+      <div class="row actions">
+      <%= f.submit :class=> 'comment-button' %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
-<script type="text/javascript">
-$('#comment-button', this).on('click', function(e){
-  e.preventDefault();
-    $.ajax("/comments",{
-      dataType: 'json',
-      contentType: 'application/json',
-      type: 'POST',
-      data: JSON.stringify({
-       // authenticity_token: auth_token,
-        // comment: {
-        //   post_id: 1,
-        //   user_id: 1,
-        //   text: $('#comment_text').val()
-
-        // }
-              }),
-      success: function(data){console.log("success here");console.log(data)},
-      error: function(data){console.log("error here"); console.log(data);}
+  <script type="text/javascript">
+  $('.comment-button').on('click', function(e){
+    e.preventDefault();
+    var commentForm = $(this).parents('form#new_comment').serializeArray();
+    var sendData = {
+      comment: {
+        'post_id': commentForm[2]['value'], 
+        'text': commentForm[1]['value'], 
+        'user_id': commentForm[3]['value']
+      }
+    }
+    // console.log(sendData);
+    // console.log(commentForm[0][])
+      $.ajax({
+        type: 'POST',
+        url: "/comments",
+        dataType: 'JSON',
+        data: sendData,
+        success: function(data){
+          console.log("success here");
+          console.log(data["text"]);
+          $(this).parents('form#new_comment').find('ul.comments-wrap[data-postid='+ sendData["comment"]["post_id"] +']').append("<li>" + data["text"] + "</li>");
+        },
+        error: function(data){console.log("error here"); console.log(data);}
+      });
     });
-  });
-</script>
+  </script>
+</div>

@@ -1,2 +1,3 @@
+$('input#comment_text').val("");
+$('div.post_template', this).html(<%= render 'posts/post_template', locals: { @user => current_user} %>);
 
-$('form').remove();
